@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="action_picking_in_tree" model="ir.actions.act_window">
+            <field name="name">Incoming Shipments</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{'contact_display': 'partner_address'}</field>
+            <field name="domain">[('picking_type_code','=','incoming')]</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_picking_int_tree" model="ir.actions.act_window">
+            <field name="name">Internal Moves</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{'contact_display': 'partner_address'}</field>
+            <field name="domain">[('picking_type_code','=','internal')]</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_picking_out_tree" model="ir.actions.act_window">
+            <field name="name">Outgoing Shipments</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{'contact_display': 'partner_address'}</field>
+            <field name="domain">[('picking_type_code','=','outgoing')]</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <menuitem name="Warehouse Moves" id="menu_stock_warehouse_moves" parent="stock.menu_stock_root" sequence="0"/>
+
+        <menuitem name="Incoming Shipments" id="menu_stock_incoming_shipments" parent="menu_stock_warehouse_moves" action="action_picking_in_tree" />
+        <menuitem name="Internal Moves" id="menu_stock_internal_moves" parent="menu_stock_warehouse_moves" action="action_picking_int_tree" />
+        <menuitem name="Delivery Orders" id="menu_stock_delivery_orders" parent="menu_stock_warehouse_moves" action="action_picking_out_tree" />
+
+    </data>
+</openerp>
